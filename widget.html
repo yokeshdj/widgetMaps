@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+	  <script src="../js/lib/ZohoEmbededAppSDK.min.js"></script>
+  </head>
+  <body>
+    <h2>This is a sample Widget built using Zoho Extension toolkit.</h2>
+    <h2>Test</h2>
+    <div id="mapArea">
+
+    </div>
+  </body>
+  <!-- <script type="text/javascript">
+			$(document).ready(function(){
+				initializeWidget();
+			})
+		</script> -->
+    <script>
+      window.onload(()=>{
+        const mapArea = document.getElementById('mapArea')
+    	ZOHO.embeddedApp.on("PageLoad",function(data){
+        ZOHO.CRM.API.getRecord({Entity:data.Entity,RecordID:data.EntityId})
+			  .then(function(response)
+			  {
+				document.getElementById("mapArea").innerHTML = `<iframe width="450" height="250"
+					frameborder="0" style="border:0"
+					src="https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${response.data[0].Street} ${response.data[0].City} ${response.data[0].Zip_Code} ${response.data[0].Country}" allowfullscreen>
+				</iframe>`
+			});
+      })
+      }
+    </script>
+</html>
